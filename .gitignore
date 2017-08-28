@@ -1,0 +1,7 @@
+# ignore idea project specific files
+.idea/
+
+# bower and npm
+
+bower_components/
+node_modules/

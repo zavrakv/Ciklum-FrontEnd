@@ -1,0 +1,40 @@
+{
+  "name": "ciklum-frontend",
+  "version": "1.0.0",
+  "description": "ciklum front-end task",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/server/app.js",
+    "install": "bower install"
+  },
+  "author": "zavrakv",
+  "license": "ISC",
+  "devDependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "grunt": "^1.0.1",
+    "grunt-browser-sync": "^2.2.0",
+    "grunt-cli": "~0.1.13",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-less": "^1.4.1",
+    "grunt-contrib-uglify": "^3.0.1",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-html2js": "~0.2.7",
+    "grunt-karma": "^2.0.0",
+    "jasmine": "^2.6.0",
+    "jasmine-core": "^2.6.4",
+    "karma": "^1.7.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-jasmine": "^1.1.0",
+    "karma-jasmine-html-reporter": "^0.2.2",
+    "karma-ng-html2js-preprocessor": "~0.1.0",
+    "karma-phantomjs-launcher": "^1.0.4",
+    "less-plugin-autoprefix": "^1.5.1",
+    "less-plugin-clean-css": "^1.5.1",
+    "morgan": "^1.8.2",
+    "phantomjs": "^2.1.7"
+  }
+}
