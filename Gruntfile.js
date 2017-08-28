@@ -7,9 +7,9 @@ module.exports = function(grunt) {
       dev: {
         bsFiles: {
           src : [
-            'src/**/*.css',
-            'src/**/*.js',
-            'src/**/*.html'
+            'app/**/*.css',
+            'app/**/*.js',
+            'app/**/*.html'
           ]
         },
         options: {
@@ -35,10 +35,10 @@ module.exports = function(grunt) {
     
     html2js: {
       options: {
-        base: 'src/app'
+        base: 'app'
       },
       dist: {
-        src: ['src/app/**/*.html'],
+        src: ['app/**/*.html'],
         dest: 'tmp/templates.js'
       }
     },
@@ -51,9 +51,9 @@ module.exports = function(grunt) {
       dist: {
         src: [
           'tmp/*.js',
-          'src/app/**/*.module.js',
-          'src/app/**/*.js',
-          '!src/app/**/*.spec.js'
+          'app/**/*.module.js',
+          'app/**/*.js',
+          '!app/**/*.spec.js'
         ],
         dest: 'public/js/app.min.js'
       },
@@ -88,22 +88,22 @@ module.exports = function(grunt) {
           sourceMapURL: '/css/main.css.map',
           sourceMapBasepath: 'public',
           sourceMapRootpath: '/',
-          paths: ['src/app/main.less']
+          paths: ['app/main.less']
         },
         files: {
-          'public/css/main.css': 'src/app/main.less'
+          'public/css/main.css': 'app/main.less'
         }
       },
       prod: {
         options: {
-          paths: ['src/app/main.less'],
+          paths: ['app/main.less'],
           plugins: [
             new (require('less-plugin-autoprefix'))({browsers: ["last 2 versions"]}),
             new (require('less-plugin-clean-css'))
           ]
         },
         files: {
-          'public/css/main.css': 'src/app/main.less'
+          'public/css/main.css': 'app/main.less'
         }
       }
     },
@@ -133,21 +133,21 @@ module.exports = function(grunt) {
     copy: {
       main: {
         files: [
-          {expand: true, cwd: 'src/', src: ['fonts/**'], dest: 'public/'}
+          {expand: true, cwd: 'app/', src: ['fonts/**'], dest: 'public/'}
         ]
       }
     },
     
     watch: {
       dev: {
-        files: [ 'Gruntfile.js', 'src/**/*.js', 'src/**/*.html', 'src/**/*.less' ],
+        files: [ 'Gruntfile.js', 'app/**/*.js', 'app/**/*.html', 'app/**/*.less' ],
         tasks: [ 'html2js:dist', 'concat:dist', 'concat:vendor', 'concat:css', 'less:dev', 'clean:temp', 'copy:main' ],
         options: {
           atBegin: true
         }
       },
       min: {
-        files: [ 'Gruntfile.js', 'src/**/*.js', '*.html' ],
+        files: [ 'Gruntfile.js', 'app/**/*.js', '*.html' ],
         tasks: [ 'karma:unit', 'html2js:dist', 'concat:dist', 'clean:temp', 'uglify:dist' ],
         options: {
           atBegin: true
