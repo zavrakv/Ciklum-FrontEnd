@@ -16,37 +16,7 @@ body {
   min-height: 100vh;
 }
 
-/**
- * The dnd-list should always have a min-height,
- * otherwise you can't drop to it once it's empty
- */
-md-list[dnd-list] {
-  min-height: 42px;
-  padding-left: 0;
-}
-
-/**
- * The dndDraggingSource class will be applied to
- * the source element of a drag operation. It makes
- * sense to hide it to give the user the feeling
- * that he's actually moving it.
- */
-md-list[dnd-list] .dndDraggingSource {
-  display: none;
-}
-
-/**
- * An element with .dndPlaceholder class will be
- * added to the dnd-list while the user is dragging
- * over it.
- */
-md-list[dnd-list] .dndPlaceholder {
-  background-color: #ddd;
-  display: block;
-  min-height: 42px;
-}
-
-md-list[dnd-list] md-list-item {
+md-list md-list-item {
   background-color: #fff;
   border: 1px solid #ddd;
   border-top-right-radius: 4px;
@@ -56,18 +26,10 @@ md-list[dnd-list] md-list-item {
   margin-bottom: -1px;
 }
 
-/**
- * Show selected elements in green
- */
-md-list[dnd-list] md-list-item.selected {
-  background-color: #dff0d8;
-  color: #3c763d;
+md-list-item:before {
+  content: none;
 }
 
-md-list-item:hover {
-  cursor: move !important;
-}
-
-md-list-item [dnd-nodrag] {
-  cursor: default;
+.subheader {
+  background: transparent !important;
 }
