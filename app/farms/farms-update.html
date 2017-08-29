@@ -1,0 +1,34 @@
+<section id="farms-update" layout="column" layout-padding>
+
+    <h2>Create and modify existing farm / server</h2>
+
+    <md-content>
+
+        <div layout-gt-sm="column">
+            <md-input-container>
+                <input type="text" ng-model="farm.name" placeholder="New farm name">
+            </md-input-container>
+        </div>
+
+        <md-button class="md-raised">Create farm <md-icon class="material-icons">done</md-icon></md-button>
+
+        <div layout-gt-sm="row">
+            <md-input-container>
+                <input type="text" ng-model="farm.servers.name" placeholder="Module name">
+            </md-input-container>
+            <md-input-container>
+                <label>Server's origin</label>
+                <md-select ng-model="vm.selectedFarm">
+                    <md-option><em>None</em></md-option>
+                    <md-option ng-repeat="farm in vm.farms" ng-value="farm.name">
+                        {{farm.name}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-button class="md-raised">Create server <md-icon class="material-icons">done</md-icon></md-button>
+        </div>
+
+
+    </md-content>
+
+</section>

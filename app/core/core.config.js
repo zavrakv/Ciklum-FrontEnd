@@ -3,17 +3,11 @@
     .module('app.core')
     .config(config);
   
-  config.$inject = ['$mdToastProvider', '$mdThemingProvider'];
+  config.$inject = [];
   
-  function config ($mdToastProvider, $mdThemingProvider) {
+  function config () {
     
-    $mdThemingProvider
-      .theme("add-toast");
-    
-    $mdThemingProvider
-      .theme("remove-toast");
-  
-    // This removes md-theme-style tags from head section
-    $mdThemingProvider.generateThemesOnDemand(true);
+    // // This removes md-theme-style tags from head section
+    // $mdThemingProvider.generateThemesOnDemand(true);
   }
 })();

@@ -5,11 +5,11 @@
     .module('app.core')
     .constant('Config', (function () {
       
-      var API_DOMAIN = 'http://localhost:3000' + '/api';
+      var API_DOMAIN = 'http://localhost:3030' + '/api/farms/';
       return {
         
-        //getAllPizzas
-        getPizzas: API_DOMAIN + '/pizzas'
+        //Farms
+        getAllFarms: API_DOMAIN + 'get-all-farms'
       }
     })());
 })();

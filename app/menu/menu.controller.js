@@ -15,9 +15,9 @@
       href: '/list',
       uiSref: 'list'
     }, {
-      menuName: 'Modify Farms',
-      href: '/modify-farms',
-      uiSref: 'cart'
+      menuName: 'Edit Farms',
+      href: '/farms-edit',
+      uiSref: 'farms-edit'
     }]
     
   }
