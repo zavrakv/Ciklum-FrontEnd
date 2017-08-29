@@ -1,12 +1,19 @@
 (function () {
 	'use strict';
 
-	mainController.$inject = [];
+	mainController.$inject = ['FarmsFactory'];
 
-	function mainController() {
+	function mainController(FarmsFactory) {
 		var vm = this;
-    
   
+		
+    
+    FarmsFactory.getAllFarms()
+      .then(function (res) {
+        console.log(res);
+        vm.farms = res;
+        vm.farms.selected = null
+      });
     
   }
   

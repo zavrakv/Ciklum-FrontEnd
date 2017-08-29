@@ -1,3 +1,28 @@
 <div class="container">
+    <md-list ng-repeat="farm in vm.farms" ng-cloak dnd-list="farm.servers">
+        <md-switch ng-model="data.cb1">
+            Auto-refresh {{ farm.name }}
+        </md-switch>
 
+        <md-subheader class="md-no-sticky">Single Action Checkboxes</md-subheader>
+        <md-list-item  ng-repeat="server in farm.servers track by $index"
+                       dnd-draggable="server"
+                       dnd-moved="farm.servers.splice($index, 1)"
+                       dnd-effect-allowed="move"
+                       dnd-selected="vm.farms.selected = server"
+                       ng-class="{'selected':vm.farms.selected === server}">
+            <div dnd-nodrag>
+                <p> {{ server.moduleName }} </p>
+                <div>
+                Queues: {{ server.queuesHealth }}
+                Thread: {{ server.threadHealth }}
+                DB: {{ server.databaseHealth }}
+                </div>
+                <md-checkbox class="md-secondary" ng-model="topping.wanted"></md-checkbox>
+            </div>
+
+        </md-list-item>
+
+        <!--<md-divider></md-divider>-->
+    </md-list>
 </div>

@@ -66,7 +66,8 @@ module.exports = function(grunt) {
           'bower_components/angular-messages/angular-messages.min.js',
           'bower_components/angular-material/angular-material.min.js',
           'bower_components/jquery/dist/jquery.min.js',
-          'bower_components/bootstrap/dist/js/bootstrap.min.js'
+          'bower_components/bootstrap/dist/js/bootstrap.min.js',
+          'node_modules/angular-drag-and-drop-lists/angular-drag-and-drop-lists.min.js'
         ],
         dest: 'public/js/vendor.min.js'
       },

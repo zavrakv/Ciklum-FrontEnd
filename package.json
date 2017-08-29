@@ -11,6 +11,7 @@
   "author": "zavrakv",
   "license": "ISC",
   "devDependencies": {
+    "angular-drag-and-drop-lists": "^2.1.0",
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "grunt": "^1.0.1",
