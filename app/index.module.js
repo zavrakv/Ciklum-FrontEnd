@@ -7,6 +7,7 @@
       'templates-dist',
       'app.main',
       'app.farms',
+      'app.servers',
       'app.menu'
     ]);
 
