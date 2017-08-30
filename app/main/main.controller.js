@@ -12,27 +12,12 @@
     vm.refreshFarm = refreshFarm;
     
     vm.promises = [];
-    
-    FarmsFactory.getAllFarms()
-      .then(function (res) {
-        vm.farms = res;
-        vm.farms.selected = null
-      });
-    
-    FarmsFactory.getAllServersStatus()
-      .then(function (res) {
-        var count = 0;
-        
-        for (var i = 0; i < vm.farms.length; i++) {
-          for (var j = 0; j < vm.farms[i].servers.length; j++) {
-            vm.farms[i].servers[j].status = res[count];
-            count += 1;
-          }
-        }
-      });
+    vm.refreshTime = 3000;
+    /*TODO: create interval reset time (to change for other values)*/
+    vm.infoFields = ['queues', 'thread', 'database'];
     
     function toggleFarmAutorefresh(state, index) {
-      toggleServersGlobal(!state, index)
+      toggleServersGlobal(state, index)
     }
     
     function toggleServersGlobal(state, index) {
@@ -53,7 +38,7 @@
     }
     
     function clearInterval(id) {
-      angular.forEach(vm.promises, function (object, index) {
+      angular.forEach(vm.promises, function (object) {
         
         if (object.serverId === id) {
           $interval.cancel(object.promise);
@@ -79,14 +64,19 @@
           .then(function (res) {
             vm.farms[index].servers[$index].status = res;
           });
-      }, 3000);
+      }, vm.refreshTime);
       
       vm.promises.push({ serverId: serverId, promise: promise })
     }
     
-    function refreshFarm(index, id) {
+    function refreshFarm(index, farm) {
+      
       angular.forEach(vm.farms[index].servers, function (server, ind) {
-        refreshSingleServer(index, id, ind, server._id)
+        if (farm.toggle) {
+          refreshSingleServer(index, farm._id, ind, server._id)
+        } else {
+          clearInterval(server._id );
+        }
       })
     }
   }
@@ -98,7 +88,7 @@
 			controller: mainController,
 			controllerAs: 'vm',
       bindings: {
-      
+        farms: '<'
       }
     })
 })();

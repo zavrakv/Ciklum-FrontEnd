@@ -1,51 +1,44 @@
 <div class="container">
 
-        <md-list ng-repeat="farm in vm.farms track by $index" ng-cloak dnd-list="farm.servers">
+    <md-input-container>
+        <!--TODO: validation for non-zero-->
+        <input ng-model="vm.refreshTime" type="number" placeholder="Refresh time in ms">
+    </md-input-container>
 
-            <md-switch class="farm-switch" ng-model="farm.toggle" ng-click="vm.toggleFarmAutorefresh(farm.toggle, $index);
-                       vm.refreshFarm($index, farm._id)">
-                Auto-refresh {{ farm.name }}
-            </md-switch>
+    <md-list ng-repeat="farm in vm.farms track by $index" ng-cloak>
 
-            <md-list-item ng-repeat="server in farm.servers"
-                          ng-class="{'selected':vm.farms.selected === server}">
+        <md-switch class="farm-switch" ng-model="farm.toggle" ng-change="vm.toggleFarmAutorefresh(farm.toggle, $index);
+                   vm.refreshFarm($index, farm)">
+            Auto-refresh {{ farm.name }}
+        </md-switch>
 
-                <p> {{ server.moduleName }} </p>
-                <div class="statuses">
-                    Queues:
-                    <md-icon class="bad-status" ng-if="farm.servers[$index].status.queuesHealth === 'BAD'">
+        <md-list-item ng-repeat="server in farm.servers">
+
+            <p> {{ server.moduleName }} </p>
+            <div class="status" ng-repeat="field in vm.infoFields">
+                <p class="text-capitalize">{{ field  }} :
+                    <md-icon class="bad-status" ng-if="farm.servers[$parent.$index].status[field + 'Health'] === 'BAD'">
                         battery_alert
                         <md-tooltip>Status: BAD</md-tooltip>
                     </md-icon>
-                    <md-icon class="ok-status" ng-if="farm.servers[$index].status.queuesHealth === 'OK'">
+                    <md-icon class="ok-status" ng-if="farm.servers[$parent.$index].status[field + 'Health'] === 'OK'">
                         battery_charging_full
                         <md-tooltip>Status: OK</md-tooltip>
                     </md-icon>
-                    Thread:
-                    <md-icon class="bad-status" ng-if="farm.servers[$index].status.threadHealth === 'BAD'">
-                        battery_alert
-                        <md-tooltip>Status: BAD</md-tooltip>
-                    </md-icon>
-                    <md-icon class="ok-status" ng-if="farm.servers[$index].status.threadHealth === 'OK'">
-                        battery_charging_full
-                        <md-tooltip>Status: OK</md-tooltip>
-                    </md-icon>
-                    DB:
-                    <md-icon class="bad-status" ng-if="farm.servers[$index].status.databaseHealth === 'BAD'">
-                        battery_alert
-                        <md-tooltip>Status: BAD</md-tooltip>
-                    </md-icon>
-                    <md-icon class="ok-status" ng-if="farm.servers[$index].status.databaseHealth === 'OK'">
-                        battery_charging_full
-                        <md-tooltip>Status: OK</md-tooltip>
-                    </md-icon>
-                </div>
+                </p>
 
-                <md-subheader class="subheader">Auto-refresh {{ server.moduleName }}</md-subheader>
-                <md-switch class="md-secondary" ng-model="server.toggle"
-                           ng-change="vm.toggleAutorefresh($parent.$index, $index, farm, server)"></md-switch>
-            </md-list-item>
+            </div>
 
-            <md-divider></md-divider>
-        </md-list>
+            <md-button ui-sref="servers({id: server._id, farm_id: farm._id})">
+                <md-icon>info_outline</md-icon>
+                <md-tooltip>Detailed info</md-tooltip>
+            </md-button>
+            <md-switch class="md-secondary" ng-model="server.toggle"
+                       ng-change="vm.toggleAutorefresh($parent.$index, $index, farm, server)"></md-switch>
+            <md-subheader class="subheader">Auto-refresh {{ server.moduleName }}</md-subheader>
+
+        </md-list-item>
+
+        <md-divider></md-divider>
+    </md-list>
 </div>
