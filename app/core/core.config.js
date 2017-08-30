@@ -3,11 +3,20 @@
     .module('app.core')
     .config(config);
   
-  config.$inject = [];
+  config.$inject = ['$mdThemingProvider'];
   
-  function config () {
+  function config ($mdThemingProvider) {
+   
+    var farmGreenMap = $mdThemingProvider.extendPalette('green', {
+      '500': '#27ae61'
+    });
     
-    // // This removes md-theme-style tags from head section
-    // $mdThemingProvider.generateThemesOnDemand(true);
+    $mdThemingProvider.definePalette('farmGreen', farmGreenMap);
+    
+    $mdThemingProvider.theme('default')
+      .accentPalette('farmGreen', {
+        'default': '500'
+      });
+  
   }
 })();
