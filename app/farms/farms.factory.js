@@ -10,13 +10,38 @@
   
   function MainFactory($http, Config, $q) {
     return {
-      getAllFarms: getAllFarms
+      getAllFarms: getAllFarms,
+      getAllServersStatus: getAllServersStatus,
+      getServerStatus: getServerStatus
     };
     
     function getAllFarms() {
       var request = $http({
         method: 'GET',
         url: Config.getAllFarms
+      });
+      return (request.then(handleSuccess, handleError));
+    }
+    
+    function getAllServersStatus(id) {
+      var request = $http({
+        method: 'GET',
+        url: Config.getAllServersStatus,
+        params: {
+          id: id
+        }
+      });
+      return (request.then(handleSuccess, handleError));
+    }
+    
+    function getServerStatus(_id, serverId) {
+      var request = $http({
+        method: 'POST',
+        url: Config.getServerStatus,
+        data: {
+          _id: _id,
+          serverId: serverId
+        }
       });
       return (request.then(handleSuccess, handleError));
     }

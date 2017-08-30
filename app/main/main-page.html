@@ -2,7 +2,8 @@
 
         <md-list ng-repeat="farm in vm.farms track by $index" ng-cloak dnd-list="farm.servers">
 
-            <md-switch ng-model="farm.toggle" ng-click="vm.toggleFarmAutorefresh(farm.toggle, $index)">
+            <md-switch class="farm-switch" ng-model="farm.toggle" ng-click="vm.toggleFarmAutorefresh(farm.toggle, $index);
+                       vm.refreshFarm($index, farm._id)">
                 Auto-refresh {{ farm.name }}
             </md-switch>
 
@@ -10,14 +11,39 @@
                           ng-class="{'selected':vm.farms.selected === server}">
 
                 <p> {{ server.moduleName }} </p>
-                <div>
-                    Queues: {{ server.queuesHealth }}
-                    Thread: {{ server.threadHealth }}
-                    DB: {{ server.databaseHealth }}
+                <div class="statuses">
+                    Queues:
+                    <md-icon class="bad-status" ng-if="farm.servers[$index].status.queuesHealth === 'BAD'">
+                        battery_alert
+                        <md-tooltip>Status: BAD</md-tooltip>
+                    </md-icon>
+                    <md-icon class="ok-status" ng-if="farm.servers[$index].status.queuesHealth === 'OK'">
+                        battery_charging_full
+                        <md-tooltip>Status: OK</md-tooltip>
+                    </md-icon>
+                    Thread:
+                    <md-icon class="bad-status" ng-if="farm.servers[$index].status.threadHealth === 'BAD'">
+                        battery_alert
+                        <md-tooltip>Status: BAD</md-tooltip>
+                    </md-icon>
+                    <md-icon class="ok-status" ng-if="farm.servers[$index].status.threadHealth === 'OK'">
+                        battery_charging_full
+                        <md-tooltip>Status: OK</md-tooltip>
+                    </md-icon>
+                    DB:
+                    <md-icon class="bad-status" ng-if="farm.servers[$index].status.databaseHealth === 'BAD'">
+                        battery_alert
+                        <md-tooltip>Status: BAD</md-tooltip>
+                    </md-icon>
+                    <md-icon class="ok-status" ng-if="farm.servers[$index].status.databaseHealth === 'OK'">
+                        battery_charging_full
+                        <md-tooltip>Status: OK</md-tooltip>
+                    </md-icon>
                 </div>
 
                 <md-subheader class="subheader">Auto-refresh {{ server.moduleName }}</md-subheader>
-                <md-switch class="md-secondary" ng-model="server.toggle" ng-change="vm.toggleAutorefresh($parent.$index)"></md-switch>
+                <md-switch class="md-secondary" ng-model="server.toggle"
+                           ng-change="vm.toggleAutorefresh($parent.$index, $index, farm, server)"></md-switch>
             </md-list-item>
 
             <md-divider></md-divider>
