@@ -28,6 +28,8 @@ switch (environment) {
   default:
     console.log('** DEV **');
     app.use(express.static('./public'));
+    app.use(express.static('./'));
+    app.use(express.static('./tmp'));
     
     // Any deep link calls should return index.html
     app.use('/*', express.static('./public/index.html'));
