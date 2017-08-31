@@ -1,0 +1,42 @@
+<div class="container">
+
+    <md-list ng-repeat="farm in vm.farms track by $index" ng-cloak>
+
+        <md-switch class="farm-switch" ng-model="farm.toggle" ng-change="vm.toggleFarmAutorefresh(farm.toggle, $index);
+                   vm.refreshFarm($index, farm)">
+            Auto-refresh {{ farm.name }}
+        </md-switch>
+
+        <md-list-item class="server" ng-repeat="server in farm.servers">
+
+            <p class="module-name"> {{ server.moduleName }} </p>
+            <div class="status" ng-repeat="field in vm.infoFields" ng-show="!server.status.message">
+                <p class="text-capitalize info-bar">{{ field  }} :
+                    <md-icon class="bad-status" ng-if="farm.servers[$parent.$index].status[field + 'Health'] === 'BAD'">
+                        battery_alert
+                        <md-tooltip>Status: BAD</md-tooltip>
+                    </md-icon>
+                    <md-icon class="ok-status" ng-if="farm.servers[$parent.$index].status[field + 'Health'] === 'OK'">
+                        battery_charging_full
+                        <md-tooltip>Status: OK</md-tooltip>
+                    </md-icon>
+                </p>
+            </div>
+
+            <p ng-show="server.status.message" class="error-text bad-status">
+                {{ server.status.message }}
+            </p>
+
+            <md-button class="more-info" ui-sref="servers({id: server._id, farm_id: farm._id})" ng-if="!server.status.message">
+                <md-icon>info_outline</md-icon>
+                <md-tooltip>Detailed info</md-tooltip>
+            </md-button>
+            <md-switch class="md-secondary" ng-model="server.toggle"
+                       ng-change="vm.toggleAutorefresh($parent.$index, $index, farm, server)"></md-switch>
+            <md-subheader class="subheader info-subheader">Auto-refresh {{ server.moduleName }}</md-subheader>
+
+        </md-list-item>
+
+        <md-divider></md-divider>
+    </md-list>
+</div>
