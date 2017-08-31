@@ -5,7 +5,7 @@
     .module('app.core')
     .constant('Config', (function () {
       
-      var API_DOMAIN = 'http://localhost:3000' + '/api/';
+      var API_DOMAIN = 'http://207.154.201.232:3000' + '/api/';
       return {
         
         //Farms

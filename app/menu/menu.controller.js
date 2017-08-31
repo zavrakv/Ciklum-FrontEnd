@@ -1,24 +1,10 @@
 (function () {
   'use strict';
   
-  menuController.$inject = ['$state', '$scope', '$rootScope'];
+  menuController.$inject = [];
   
-  function menuController($state, $scope, $rootScope) {
+  function menuController() {
     var vm = this;
-    
-    $rootScope.$on('$viewContentLoading', function () {
-      vm.currentPage = $state.current.name;
-    });
-    
-    vm.menuItems = [{
-      menuName: 'List',
-      href: '/list',
-      uiSref: 'list'
-    }, {
-      menuName: 'Edit Farms',
-      href: '/farms-edit',
-      uiSref: 'farms-edit'
-    }]
     
   }
   

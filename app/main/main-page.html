@@ -1,10 +1,5 @@
 <div class="container">
 
-    <md-input-container>
-        <!--TODO: validation for non-zero-->
-        <input ng-model="vm.refreshTime" type="number" placeholder="Refresh time in ms">
-    </md-input-container>
-
     <md-list ng-repeat="farm in vm.farms track by $index" ng-cloak>
 
         <md-switch class="farm-switch" ng-model="farm.toggle" ng-change="vm.toggleFarmAutorefresh(farm.toggle, $index);
@@ -12,11 +7,11 @@
             Auto-refresh {{ farm.name }}
         </md-switch>
 
-        <md-list-item ng-repeat="server in farm.servers">
+        <md-list-item class="server" ng-repeat="server in farm.servers">
 
-            <p> {{ server.moduleName }} </p>
-            <div class="status" ng-repeat="field in vm.infoFields">
-                <p class="text-capitalize">{{ field  }} :
+            <p class="module-name"> {{ server.moduleName }} </p>
+            <div class="status" ng-repeat="field in vm.infoFields" ng-show="!server.status.message">
+                <p class="text-capitalize info-bar">{{ field  }} :
                     <md-icon class="bad-status" ng-if="farm.servers[$parent.$index].status[field + 'Health'] === 'BAD'">
                         battery_alert
                         <md-tooltip>Status: BAD</md-tooltip>
@@ -26,16 +21,19 @@
                         <md-tooltip>Status: OK</md-tooltip>
                     </md-icon>
                 </p>
-
             </div>
 
-            <md-button ui-sref="servers({id: server._id, farm_id: farm._id})">
+            <p ng-show="server.status.message" class="error-text bad-status">
+                {{ server.status.message }}
+            </p>
+
+            <md-button class="more-info" ui-sref="servers({id: server._id, farm_id: farm._id})" ng-if="!server.status.message">
                 <md-icon>info_outline</md-icon>
                 <md-tooltip>Detailed info</md-tooltip>
             </md-button>
             <md-switch class="md-secondary" ng-model="server.toggle"
                        ng-change="vm.toggleAutorefresh($parent.$index, $index, farm, server)"></md-switch>
-            <md-subheader class="subheader">Auto-refresh {{ server.moduleName }}</md-subheader>
+            <md-subheader class="subheader info-subheader">Auto-refresh {{ server.moduleName }}</md-subheader>
 
         </md-list-item>
 

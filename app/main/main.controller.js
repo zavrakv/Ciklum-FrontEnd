@@ -7,20 +7,14 @@
 		var vm = this;
     
     vm.toggleFarmAutorefresh = toggleFarmAutorefresh;
-    vm.toggleServersGlobal = toggleServersGlobal;
     vm.toggleAutorefresh = toggleAutorefresh;
     vm.refreshFarm = refreshFarm;
     
     vm.promises = [];
     vm.refreshTime = 3000;
-    /*TODO: create interval reset time (to change for other values)*/
     vm.infoFields = ['queues', 'thread', 'database'];
     
     function toggleFarmAutorefresh(state, index) {
-      toggleServersGlobal(state, index)
-    }
-    
-    function toggleServersGlobal(state, index) {
       angular.forEach(vm.farms[index].servers, function (server) {
         server.toggle = state;
       })

@@ -12,7 +12,7 @@
     /*
      * 3rd Party modules
      */
-    'ui.router', 'dndLists'
+    'ui.router'
 	]);
   
 })();

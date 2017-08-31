@@ -2,11 +2,7 @@
 @import "variables";
 @import "main/main-page";
 @import "menu/menu";
-@import "farms/farms";
-
-h2 {
-  font-size: @20;
-}
+@import "servers/servers";
 
 html {
   font-size: 62.5%;
@@ -14,39 +10,10 @@ html {
 
 body {
   min-height: 100vh;
+  background-color: @white;
+  color: @black;
 }
 
-md-list md-list-item {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-top-right-radius: 4px;
-  border-top-left-radius: 4px;
-  display: block;
-  padding: 10px 15px;
-  margin-bottom: -1px;
-}
-
-md-list-item:before {
-  content: none;
-}
-
-.subheader {
-  background: transparent !important;
-}
-
-.statuses {
-  display: flex;
-  align-items: center;
-}
-
-.farm-switch {
-  font-size: 18px;
-}
-
-.bad-status {
-  color: #c1392d;
-}
-
-.ok-status {
-  color: #27ae61;
+h2 {
+  font-size: @20;
 }
