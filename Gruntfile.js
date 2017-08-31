@@ -7,14 +7,14 @@ module.exports = function(grunt) {
       dev: {
         bsFiles: {
           src : [
-            'app/**/*.css',
-            'app/**/*.js',
-            'app/**/*.html'
+            './app/**/*.css',
+            './app/**/*.js',
+            './app/**/*.html'
           ]
         },
         options: {
           proxy: "localhost:8001",
-          watchTask: true
+          // watchTask: true
         }
       }
     },
@@ -35,11 +35,11 @@ module.exports = function(grunt) {
     
     html2js: {
       options: {
-        base: 'app'
+        base: './app'
       },
       dist: {
-        src: ['app/**/*.html'],
-        dest: 'tmp/templates.js'
+        src: ['./app/**/*.html'],
+        dest: './tmp/templates.js'
       }
     },
     
@@ -50,34 +50,34 @@ module.exports = function(grunt) {
       },
       dist: {
         src: [
-          'tmp/*.js',
-          'app/**/*.module.js',
-          'app/**/*.js',
-          '!app/**/*.spec.js'
+          './tmp/*.js',
+          './app/**/*.module.js',
+          './app/**/*.js',
+          '!./app/**/*.spec.js'
         ],
-        dest: 'public/js/app.min.js'
+        dest: './public/js/app.min.js'
       },
       vendor: {
         src: [
-          'bower_components/angular/angular.min.js',
-          'bower_components/angular-ui-router/release/angular-ui-router.min.js',
-          'bower_components/angular-animate/angular-animate.min.js',
-          'bower_components/angular-aria/angular-aria.min.js',
-          'bower_components/angular-messages/angular-messages.min.js',
-          'bower_components/angular-material/angular-material.min.js',
-          'bower_components/jquery/dist/jquery.min.js',
-          'bower_components/bootstrap/dist/js/bootstrap.min.js',
-          'node_modules/angular-drag-and-drop-lists/angular-drag-and-drop-lists.min.js'
+          './bower_components/angular/angular.min.js',
+          './bower_components/angular-ui-router/release/angular-ui-router.min.js',
+          './bower_components/angular-animate/angular-animate.min.js',
+          './bower_components/angular-aria/angular-aria.min.js',
+          './bower_components/angular-messages/angular-messages.min.js',
+          './bower_components/angular-material/angular-material.min.js',
+          './bower_components/jquery/dist/jquery.min.js',
+          './bower_components/bootstrap/dist/js/bootstrap.min.js',
+          './node_modules/angular-drag-and-drop-lists/angular-drag-and-drop-lists.min.js'
         ],
-        dest: 'public/js/vendor.min.js'
+        dest: './public/js/vendor.min.js'
       },
       css: {
         src: [
-          'bower_components/bootstrap/dist/css/bootstrap.min.css',
-          'bower_components/bootstrap/dist/css/bootstrap-theme.min.css',
-          'bower_components/angular-material/angular-material.min.css'
+          './bower_components/bootstrap/dist/css/bootstrap.min.css',
+          './bower_components/bootstrap/dist/css/bootstrap-theme.min.css',
+          './bower_components/angular-material/angular-material.min.css'
         ],
-        dest: 'public/css/vendor.css'
+        dest: './public/css/vendor.css'
       }
     },
     
@@ -85,26 +85,26 @@ module.exports = function(grunt) {
       dev: {
         options: {
           sourceMap: true,
-          sourceMapFilename: 'public/css/main.css.map',
+          sourceMapFilename: './public/css/main.css.map',
           sourceMapURL: '/css/main.css.map',
           sourceMapBasepath: 'public',
           sourceMapRootpath: '/',
-          paths: ['app/main.less']
+          paths: ['./app/main.less']
         },
         files: {
-          'public/css/main.css': 'app/main.less'
+          './public/css/main.css': './app/main.less'
         }
       },
       prod: {
         options: {
-          paths: ['app/main.less'],
+          paths: ['./app/main.less'],
           plugins: [
             new (require('less-plugin-autoprefix'))({browsers: ["last 2 versions"]}),
             new (require('less-plugin-clean-css'))
           ]
         },
         files: {
-          'public/css/main.css': 'app/main.less'
+          './public/css/main.css': './app/main.less'
         }
       }
     },
@@ -112,43 +112,43 @@ module.exports = function(grunt) {
     uglify: {
       dist: {
         files: {
-          'public/js/app.min.js': ['public/js/app.min.js'],
-          'public/js/vendor.min.js': ['public/js/vendor.min.js']
+          'public/js/app.min.js': ['./public/js/app.min.js'],
+          'public/js/vendor.min.js': ['./public/js/vendor.min.js']
         },
         options: {
           /*Or use $inject instead*/
           mangle: false,
           sourceMap : true,
           sourceMapIncludeSources : true,
-          sourceMapIn : 'public/js/app.min.js.map'
+          sourceMapIn : './public/js/app.min.js.map'
         }
       }
     },
     
     clean: {
       temp: {
-        src: [ 'tmp' ]
+        src: [ './tmp' ]
       }
     },
     
     copy: {
       main: {
         files: [
-          {expand: true, cwd: 'app/', src: ['fonts/**'], dest: 'public/'}
+          {expand: true, cwd: 'app/', src: ['./fonts/**'], dest: './public/'}
         ]
       }
     },
     
     watch: {
       dev: {
-        files: [ 'Gruntfile.js', 'app/**/*.js', 'app/**/*.html', 'app/**/*.less' ],
+        files: [ 'Gruntfile.js', './app/**/*.js', './app/**/*.html', './app/**/*.less' ],
         tasks: [ 'html2js:dist', 'concat:dist', 'concat:vendor', 'concat:css', 'less:dev', 'clean:temp', 'copy:main' ],
         options: {
           atBegin: true
         }
       },
       min: {
-        files: [ 'Gruntfile.js', 'app/**/*.js', '*.html' ],
+        files: [ 'Gruntfile.js', './app/**/*.js', '*.html' ],
         tasks: [ 'karma:unit', 'html2js:dist', 'concat:dist', 'clean:temp', 'uglify:dist' ],
         options: {
           atBegin: true
@@ -171,6 +171,7 @@ module.exports = function(grunt) {
   
   // Build tasks.
   grunt.registerTask('dev', [ 'browserSync', 'watch:dev' ]);
+  grunt.registerTask('build', [ 'watch:dev' ]);
   grunt.registerTask('test', [ 'karma:continuous' ]);
   grunt.registerTask('minified', [ 'browserSync', 'watch:min' ]);
   
