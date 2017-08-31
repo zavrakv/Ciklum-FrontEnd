@@ -29,10 +29,13 @@ switch (environment) {
     console.log('** DEV **');
     app.use(express.static('./public'));
     app.use(express.static('./'));
+    app.use(express.static('./js'));
     app.use(express.static('./tmp'));
     
     // Any deep link calls should return index.html
-    app.use('/*', express.static('./public/index.html'));
+    app.use('/*', function (req, res) {
+      res.sendfile('./public/index.html');
+    });
     break;
 }
 
