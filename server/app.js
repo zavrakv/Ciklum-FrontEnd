@@ -34,7 +34,7 @@ switch (environment) {
     
     // Any deep link calls should return index.html
     app.use('/*', function (req, res) {
-      res.sendFile('./public/index.html');
+      res.sendFile('public/index.html');
     });
     break;
 }
