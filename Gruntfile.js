@@ -171,7 +171,7 @@ module.exports = function(grunt) {
   
   // Build tasks.
   grunt.registerTask('dev', [ 'browserSync', 'watch:dev' ]);
-  grunt.registerTask('build', [ 'watch:dev' ]);
+  grunt.registerTask('build', [ 'html2js:dist', 'concat:dist', 'concat:vendor', 'concat:css', 'less:dev', 'clean:temp', 'copy:main' ]);
   grunt.registerTask('test', [ 'karma:continuous' ]);
   grunt.registerTask('minified', [ 'browserSync', 'watch:min' ]);
   
