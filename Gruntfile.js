@@ -14,7 +14,7 @@ module.exports = function(grunt) {
         },
         options: {
           proxy: "localhost:8001",
-          // watchTask: true
+          watchTask: true
         }
       }
     },
